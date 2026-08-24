@@ -41,13 +41,6 @@ export default function Stacks() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
               </div>
-              <div className="absolute bottom-0 left-0 right-0 p-5">
-                <h3 className="text-xl font-bold tracking-tight mb-1">{s.title}</h3>
-                <p className="text-accent text-xs uppercase tracking-wider mb-2">
-                  {s.peptides}
-                </p>
-                <p className="text-sm text-zinc-400">{s.benefit}</p>
-              </div>
             </motion.article>
           ))}
         </div>

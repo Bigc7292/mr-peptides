@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { PRODUCTS, CATEGORIES } from '../data/products'
+import { waLink } from '../config'
 
 export default function Products({ onRequestPrice }) {
   const [filter, setFilter] = useState('All')
@@ -127,12 +128,14 @@ export default function Products({ onRequestPrice }) {
                       </span>
                     ))}
                   </div>
-                  <button
-                    onClick={() => onRequestPrice(p.name)}
-                    className="w-full py-2.5 text-xs uppercase tracking-wider border border-white/15 hover:border-accent hover:text-accent transition-colors"
+                  <a
+                    href={waLink(`Hi MR PEPTIDES — I'd like pricing for ${p.name} (${p.code}).`)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full py-2.5 text-xs uppercase tracking-wider border border-white/15 hover:border-accent hover:text-accent transition-colors text-center"
                   >
                     Request Price
-                  </button>
+                  </a>
                 </div>
               </motion.article>
             ))}

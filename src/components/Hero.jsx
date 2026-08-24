@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { ChevronDown } from 'lucide-react'
 import { STATS } from '../data/products'
+import { waLink } from '../config'
 
 export default function Hero({ onNavigate }) {
   return (
@@ -79,13 +80,15 @@ export default function Hero({ onNavigate }) {
               >
                 Browse Products
               </button>
-              <button
+              <a
+                href={waLink("Hi MR PEPTIDES — I'd like pricing on your products.")}
+                target="_blank"
+                rel="noopener noreferrer"
                 data-testid="hero-request-price-button"
-                onClick={() => onNavigate('contact')}
                 className="px-6 py-3.5 border border-white/25 text-white font-semibold text-sm uppercase tracking-wider hover:border-accent hover:text-accent transition-colors"
               >
                 Request Price
-              </button>
+              </a>
             </motion.div>
           </div>
 

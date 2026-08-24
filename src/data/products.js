@@ -240,24 +240,21 @@ export const STACKS = [
     title: 'Fat Loss',
     peptides: 'Tirzepatide · MOTS-C · NAD+',
     benefit: 'Boosts metabolism and fat-loss research pathways.',
-    image:
-      'https://images.unsplash.com/photo-1693214674472-dac7fbc2410d?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzNzl8MHwxfHNlYXJjaHwyfHxhdGhsZXRlJTIwaG9sZGluZyUyMHdhdGVyJTIwYm90dGxlJTIwaW4lMjBkYXJrJTIwZ3ltfGVufDB8fHx8MTc4NjY4NTY3MXww&ixlib=rb-4.1.0&q=85',
+    image: '/stack-images/fat-loss.jpg',
     span: 'lg:col-span-4',
   },
   {
     title: 'Muscle Growth',
     peptides: 'IGF-1 LR3 · Ipamorelin',
     benefit: 'Supports strength and lean-muscle research models.',
-    image:
-      'https://images.unsplash.com/photo-1614367674345-f414b2be3e5b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzNzl8MHwxfHNlYXJjaHwzfHxhdGhsZXRlJTIwaG9sZGluZyUyMHdhdGVyJTIwYm90dGxlJTIwaW4lMjBkYXJrJTIwZ3ltfGVufDB8fHx8MTc4NjY4NTY3MXww&ixlib=rb-4.1.0&q=85',
+    image: '/stack-images/muscle-growth.jpg',
     span: 'lg:col-span-4',
   },
   {
     title: 'Cognitive Focus',
     peptides: 'BPC-157 · TB-500 · CJC-1295',
     benefit: 'Explored for mental clarity and performance research.',
-    image:
-      'https://images.unsplash.com/photo-1626956001725-b815cfdb775d?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NjZ8MHwxfHNlYXJjaHwxfHxtZWRpY2FsJTIwdmlhbCUyMGxhYiUyMGRhcmslMjBiYWNrZ3JvdW5kfGVufDB8fHx8MTc4NjY4NTY3MXww&ixlib=rb-4.1.0&q=85',
+    image: '/stack-images/cognitive-focus.jpg',
     span: 'lg:col-span-4',
   },
 ]

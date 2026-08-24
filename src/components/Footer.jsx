@@ -1,0 +1,88 @@
+import { waLink, tgLink } from '../config'
+
+const LINKS = [
+  { id: 'manifesto', label: 'The Standard' },
+  { id: 'stacks', label: 'Stacks Guide' },
+  { id: 'products', label: 'Products' },
+  { id: 'contact', label: 'Get Pricing' },
+]
+
+export default function Footer({ onNavigate }) {
+  return (
+    <footer
+      data-testid="site-footer"
+      className="relative bg-[#050505] border-t border-white/10 pt-20 pb-10 overflow-hidden"
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-16">
+          <div className="lg:col-span-2">
+            <a href="#hero" onClick={() => onNavigate('hero')} className="flex items-center gap-2.5 mb-4" data-testid="footer-logo">
+              <div className="w-9 h-9 rounded-md bg-zinc-900 border border-white/10 flex items-center justify-center">
+                <img src="/logo.jpg" alt="MR Peptides" className="w-full h-full object-contain" />
+              </div>
+              <span className="font-bold tracking-tight">
+                MR<span className="text-accent">PEPTIDES</span>
+              </span>
+            </a>
+            <p className="text-sm text-zinc-500 max-w-sm leading-relaxed">
+              Lab-verified research peptides. Independently tested, published
+              purity, and stability numbers we stand behind.
+            </p>
+          </div>
+
+          <div>
+            <p className="text-[11px] uppercase tracking-[0.25em] text-zinc-500 mb-4">
+              Navigate
+            </p>
+            <div className="flex flex-col gap-2.5">
+              {LINKS.map((l) => (
+                <button
+                  key={l.id}
+                  data-testid={`footer-${l.id}-link`}
+                  onClick={() => onNavigate(l.id)}
+                  className="text-left text-sm text-zinc-400 hover:text-[#EA580C] transition-colors duration-300"
+                >
+                  {l.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <p className="text-[11px] uppercase tracking-[0.25em] text-zinc-500 mb-4">
+              Reach us
+            </p>
+            <div className="flex flex-col gap-2.5">
+              <a
+                href={waLink("Hi MR PEPTIDES — I'd like pricing on your products.")}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-testid="footer-whatsapp-link"
+                className="text-sm text-zinc-400 hover:text-[#25D366] transition-colors"
+              >
+                WhatsApp
+              </a>
+              <a
+                href={tgLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-testid="footer-telegram-link"
+                className="text-sm text-zinc-400 hover:text-[#2AABEE] transition-colors"
+              >
+                Telegram
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div className="border-t border-white/10 pt-8 flex flex-col sm:flex-row justify-between gap-4 text-xs text-zinc-600">
+          <p>© {new Date().getFullYear()} MR PEPTIDES. Research use only.</p>
+          <p className="max-w-md sm:text-right">
+            Not for human or veterinary consumption. Not evaluated by FDA, EMA
+            or equivalent authorities.
+          </p>
+        </div>
+      </div>
+    </footer>
+  )
+}

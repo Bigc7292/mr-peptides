@@ -1,0 +1,189 @@
+import { useState, useEffect } from 'react'
+import { MessageCircle, Send } from 'lucide-react'
+import { PRODUCTS } from '../data/products'
+import { waLink, tgLink } from '../config'
+
+export default function Contact({ selectedProduct, onProductChange }) {
+  const [name, setName] = useState('')
+  const [contact, setContact] = useState('')
+  const [message, setMessage] = useState('')
+  const [product, setProduct] = useState(selectedProduct || '')
+  const [sending, setSending] = useState(false)
+  const [sent, setSent] = useState(false)
+  const [error, setError] = useState('')
+
+  useEffect(() => {
+    if (selectedProduct) setProduct(selectedProduct)
+  }, [selectedProduct])
+
+  const waMessage = `Hi MR PEPTIDES — I'd like pricing${
+    product ? ` for ${product}` : ' on your products'
+  }.${name ? ` — ${name}` : ''}${contact ? ` (${contact})` : ''}${
+    message ? `\n\n${message}` : ''
+  }`
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    setError('')
+    if (!name.trim() || !contact.trim()) {
+      setError('Add your name and a contact handle so we can reply.')
+      return
+    }
+    setSending(true)
+    // Open WhatsApp with pre-filled message (no backend required)
+    window.open(waLink(waMessage), '_blank', 'noopener,noreferrer')
+    setTimeout(() => {
+      setSending(false)
+      setSent(true)
+      setName('')
+      setContact('')
+      setMessage('')
+      setProduct('')
+      onProductChange?.('')
+      setTimeout(() => setSent(false), 4000)
+    }, 600)
+  }
+
+  return (
+    <section
+      id="contact"
+      data-testid="contact-section"
+      className="relative py-24 md:py-32 bg-[#0A0A0A] border-t border-white/10 overflow-hidden grain"
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20">
+          <div>
+            <p className="text-accent text-xs uppercase tracking-[0.3em] mb-4">
+              Contact
+            </p>
+            <h2 className="text-3xl sm:text-4xl font-black tracking-tight mb-4">
+              Request pricing
+            </h2>
+            <p className="text-zinc-400 leading-relaxed mb-8 max-w-md">
+              Pricing is on request. Tell us what you need and we reply fastest
+              on WhatsApp or Telegram.
+            </p>
+
+            <div className="flex flex-wrap gap-3">
+              <a
+                href={waLink(waMessage)}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-testid="whatsapp-order-button"
+                className="inline-flex items-center gap-2 px-5 py-3 bg-[#25D366]/10 border border-[#25D366]/30 text-[#25D366] text-sm font-medium hover:bg-[#25D366]/20 transition-colors"
+              >
+                <MessageCircle size={18} />
+                WhatsApp
+              </a>
+              <a
+                href={tgLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-testid="telegram-order-button"
+                className="inline-flex items-center gap-2 px-5 py-3 bg-[#2AABEE]/10 border border-[#2AABEE]/30 text-[#2AABEE] text-sm font-medium hover:bg-[#2AABEE]/20 transition-colors"
+              >
+                <Send size={18} />
+                Telegram
+              </a>
+            </div>
+          </div>
+
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label className="block text-[11px] uppercase tracking-wider text-zinc-500 mb-1.5">
+                Product
+              </label>
+              <select
+                data-testid="enquiry-product-select"
+                value={product}
+                onChange={(e) => {
+                  setProduct(e.target.value)
+                  onProductChange?.(e.target.value)
+                }}
+                className="w-full bg-[#050505] border border-white/10 px-4 py-3 text-sm text-white focus:outline-none focus:border-accent/50"
+              >
+                <option value="">General products inquiry</option>
+                {PRODUCTS.map((p) => (
+                  <option key={p.id} value={p.name}>
+                    {p.name} ({p.code})
+                  </option>
+                ))}
+              </select>
+              {product && (
+                <p
+                  data-testid="selected-product-label"
+                  className="text-xs text-accent mt-1.5"
+                >
+                  Selected: {product}
+                </p>
+              )}
+            </div>
+
+            <div className="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-[11px] uppercase tracking-wider text-zinc-500 mb-1.5">
+                  Name
+                </label>
+                <input
+                  data-testid="enquiry-name-input"
+                  type="text"
+                  placeholder="Your name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="w-full bg-[#050505] border border-white/10 px-4 py-3 text-sm text-white placeholder:text-zinc-600 focus:outline-none focus:border-accent/50"
+                />
+              </div>
+              <div>
+                <label className="block text-[11px] uppercase tracking-wider text-zinc-500 mb-1.5">
+                  WhatsApp / Telegram / Email
+                </label>
+                <input
+                  data-testid="enquiry-contact-input"
+                  type="text"
+                  placeholder="@handle or number"
+                  value={contact}
+                  onChange={(e) => setContact(e.target.value)}
+                  className="w-full bg-[#050505] border border-white/10 px-4 py-3 text-sm text-white placeholder:text-zinc-600 focus:outline-none focus:border-accent/50"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-[11px] uppercase tracking-wider text-zinc-500 mb-1.5">
+                Message
+              </label>
+              <textarea
+                data-testid="enquiry-message-input"
+                rows={4}
+                placeholder="Quantities, shipping region, or questions…"
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                className="w-full bg-[#050505] border border-white/10 px-4 py-3 text-sm text-white placeholder:text-zinc-600 focus:outline-none focus:border-accent/50 resize-none"
+              />
+            </div>
+
+            {error && (
+              <p className="text-sm text-red-400" role="alert">
+                {error}
+              </p>
+            )}
+            {sent && (
+              <p className="text-sm text-emerald-400">
+                Enquiry sent. We reply fastest on WhatsApp or Telegram.
+              </p>
+            )}
+
+            <button
+              type="submit"
+              data-testid="enquiry-submit-button"
+              disabled={sending}
+              className="w-full sm:w-auto px-8 py-3.5 bg-accent text-black font-semibold text-sm uppercase tracking-wider hover:bg-orange-500 transition-colors disabled:opacity-60"
+            >
+              {sending ? 'Sending…' : 'Send Enquiry'}
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+  )
+}

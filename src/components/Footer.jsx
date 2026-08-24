@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion'
 import { waLink, tgLink } from '../config'
 
 const LINKS = [
@@ -7,6 +8,25 @@ const LINKS = [
   { id: 'contact', label: 'Get Pricing' },
 ]
 
+const containerVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.08,
+      delayChildren: 0.2,
+    },
+  },
+}
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 16 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: [0.25, 1, 0.5, 1] },
+  },
+}
+
 export default function Footer({ onNavigate }) {
   return (
     <footer
@@ -14,8 +34,14 @@ export default function Footer({ onNavigate }) {
       className="relative bg-[#050505] border-t border-white/10 pt-20 pb-10 overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-16">
-          <div className="lg:col-span-2">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-40px' }}
+          className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-16"
+        >
+          <motion.div variants={itemVariants} className="lg:col-span-2">
             <a href="#hero" onClick={() => onNavigate('hero')} className="flex items-center gap-2.5 mb-4" data-testid="footer-logo">
               <div className="w-9 h-9 rounded-md bg-zinc-900 border border-white/10 flex items-center justify-center">
                 <img src="/logo.jpg" alt="MR Peptides" className="w-full h-full object-contain" />
@@ -28,60 +54,72 @@ export default function Footer({ onNavigate }) {
               Lab-verified research peptides. Independently tested, published
               purity, and stability numbers we stand behind.
             </p>
-          </div>
+          </motion.div>
 
-          <div>
+          <motion.div variants={itemVariants}>
             <p className="text-[11px] uppercase tracking-[0.25em] text-zinc-500 mb-4">
               Navigate
             </p>
             <div className="flex flex-col gap-2.5">
               {LINKS.map((l) => (
-                <button
+                <motion.button
                   key={l.id}
                   data-testid={`footer-${l.id}-link`}
                   onClick={() => onNavigate(l.id)}
-                  className="text-left text-sm text-zinc-400 hover:text-[#EA580C] transition-colors duration-300"
+                  whileHover={{ x: 4, color: '#EA580C' }}
+                  transition={{ duration: 0.35, ease: [0.25, 1, 0.5, 1] }}
+                  className="text-left text-sm text-zinc-400 transition-colors duration-300"
                 >
                   {l.label}
-                </button>
+                </motion.button>
               ))}
             </div>
-          </div>
+          </motion.div>
 
-          <div>
+          <motion.div variants={itemVariants}>
             <p className="text-[11px] uppercase tracking-[0.25em] text-zinc-500 mb-4">
               Reach us
             </p>
             <div className="flex flex-col gap-2.5">
-              <a
+              <motion.a
                 href={waLink("Hi MR PEPTIDES — I'd like pricing on your products.")}
                 target="_blank"
                 rel="noopener noreferrer"
                 data-testid="footer-whatsapp-link"
-                className="text-sm text-zinc-400 hover:text-[#25D366] transition-colors"
+                whileHover={{ x: 4, color: '#25D366' }}
+                transition={{ duration: 0.35 }}
+                className="text-sm text-zinc-400 transition-colors"
               >
                 WhatsApp
-              </a>
-              <a
+              </motion.a>
+              <motion.a
                 href={tgLink}
                 target="_blank"
                 rel="noopener noreferrer"
                 data-testid="footer-telegram-link"
-                className="text-sm text-zinc-400 hover:text-[#2AABEE] transition-colors"
+                whileHover={{ x: 4, color: '#2AABEE' }}
+                transition={{ duration: 0.35 }}
+                className="text-sm text-zinc-400 transition-colors"
               >
                 Telegram
-              </a>
+              </motion.a>
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
-        <div className="border-t border-white/10 pt-8 flex flex-col sm:flex-row justify-between gap-4 text-xs text-zinc-600">
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, margin: '-40px' }}
+          transition={{ duration: 0.7, delay: 0.3 }}
+          className="border-t border-white/10 pt-8 flex flex-col sm:flex-row justify-between gap-4 text-xs text-zinc-600"
+        >
           <p>© {new Date().getFullYear()} MR PEPTIDES. Research use only.</p>
           <p className="max-w-md sm:text-right">
             Not for human or veterinary consumption. Not evaluated by FDA, EMA
             or equivalent authorities.
           </p>
-        </div>
+        </motion.div>
       </div>
     </footer>
   )

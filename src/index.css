@@ -3,13 +3,36 @@
 @tailwind utilities;
 
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
+}
+
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
 }
 
 body {
   background: #000;
   color: #fff;
   font-family: Inter, system-ui, sans-serif;
+  cursor: none;
+}
+
+/* custom cursor utilities */
+.cursor-none,
+.cursor-none * {
+  cursor: none !important;
 }
 
 /* subtle grain overlay */
@@ -28,6 +51,55 @@ body {
     linear-gradient(rgba(234, 88, 12, 0.03) 1px, transparent 1px),
     linear-gradient(90deg, rgba(234, 88, 12, 0.03) 1px, transparent 1px);
   background-size: 48px 48px;
+}
+
+/* spotlight card glow */
+.spotlight-card {
+  position: relative;
+  overflow: hidden;
+}
+.spotlight-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(700px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(234, 88, 12, 0.12), transparent 40%);
+  transition: opacity 0.5s ease;
+}
+.spotlight-card:hover::before {
+  opacity: 1;
+}
+
+/* magnetic button wrapper */
+.magnetic-btn {
+  display: inline-block;
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* glow border animation for CTAs */
+.glow-border {
+  position: relative;
+}
+.glow-border::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #ea580c, #0f766e, #2563eb, #ea580c);
+  background-size: 300% 100%;
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.5s ease;
+  filter: blur(6px);
+}
+.glow-border:hover::after {
+  opacity: 0.6;
+  animation: glowShift 4s linear infinite;
+}
+@keyframes glowShift {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
 }
 
 /* custom scrollbar */

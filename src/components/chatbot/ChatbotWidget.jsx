@@ -1,10 +1,138 @@
 import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { MessageCircle, X, Send, Loader2, ExternalLink } from 'lucide-react'
-import { SYSTEM_PROMPT, KNOWLEDGE_BASE, QUICK_REPLIES, BRAND_COLORS } from '../config/chatbot-config'
-import { waLink } from '../config'
+import { PRODUCTS, CATEGORIES } from '../../data/products'
+import { QUICK_REPLIES, BRAND_COLORS } from '../../config/chatbot-config'
+import { waLink } from '../../config'
 
 const ACCENT = BRAND_COLORS.accent
+
+function getLocalReply(query) {
+  const lower = query.toLowerCase()
+
+  if (lower.includes('price') || lower.includes('cost') || lower.includes('pricing')) {
+    return 'Pricing is available on request via WhatsApp. Would you like me to open a chat for you?'
+  }
+
+  if (lower.includes('ship') || lower.includes('delivery') || lower.includes('shipping')) {
+    return 'We ship discreetly with temperature-controlled packaging. Lead time is 3-5 business days after confirmation. Would you like more details?'
+  }
+
+  if (lower.includes('verif') || lower.includes('lab') || lower.includes('test') || lower.includes('purity')) {
+    return 'All MR PEPTIDES products are independently tested. Stability checkpoints are third-party verified by Janoshik. Purity standards are published for every batch.'
+  }
+
+  if (lower.includes('store') || lower.includes('storage') || lower.includes('refrigerat')) {
+    return 'Store refrigerated at 2°C to 8°C unless otherwise specified on the product label. Do not freeze.'
+  }
+
+  if (lower.includes('featured') || lower.includes('main product') || lower.includes('main')) {
+    const featured = PRODUCTS.find((p) => p.tags?.includes('Featured')) || PRODUCTS[0]
+    return `Our featured product is ${featured.name} (${featured.code}). ${featured.blurb}. Would you like pricing or specifications?`
+  }
+
+  if (lower.includes('all products') || lower.includes('catalog') || lower.includes('all peptides')) {
+    return `We currently offer ${PRODUCTS.length} research compounds across ${CATEGORIES.filter((c) => c !== 'All').join(', ')} categories. Would you like me to list them?`
+  }
+
+  const matched = PRODUCTS.find((p) => {
+    const search = `${p.name} ${p.code} ${p.category} ${(p.tags || []).join(' ')}`.toLowerCase()
+    return search.includes(lower)
+  })
+
+  if (matched) {
+    const images = matched.images?.length ? ` Available images: ${matched.images.length}.` : ''
+    return `${matched.name} (${matched.code}) — ${matched.blurb}${images} Would you like pricing or more details?`
+  }
+
+  if (lower.includes('retatrutide')) {
+    return 'Retatrutide is a triple GLP-1/GIP/glucagon agonist. Available in 20mg and 40mg prefilled pen formulations. 56-day room-temperature stability. Alluvi Healthcare manufactured. Would you like specifications or pricing?'
+  }
+
+  if (lower.includes('tirzepatide')) {
+    return 'Tirzepatide is a dual GLP-1/GIP receptor agonist. Available in 40mg and 20mg formulations. For subcutaneous injection only. Store refrigerated. Would you like more details?'
+  }
+
+  if (lower.includes('bpc')) {
+    const p = PRODUCTS.find((x) => x.name?.includes('BPC'))
+    if (p) return `${p.name} (${p.code}) — ${p.blurb} Would you like pricing?`
+    return 'BPC-157 is a recovery and repair peptide. We offer several formulations including standalone and blended products. Would you like to see the full catalog?'
+  }
+
+  if (lower.includes('tb-500')) {
+    const p = PRODUCTS.find((x) => x.name?.includes('TB-500'))
+    if (p) return `${p.name} (${p.code}) — ${p.blurb} Would you like pricing?`
+    return 'TB-500 is a recovery peptide commonly paired with BPC-157. Would you like to see available formulations?'
+  }
+
+  if (lower.includes('semaglutide')) {
+    const p = PRODUCTS.find((x) => x.name?.includes('Semaglutide'))
+    if (p) return `${p.name} (${p.code}) — ${p.blurb} Would you like pricing?`
+    return 'Semaglutide is a GLP-1 receptor agonist. Available in prefilled pen formulations. Would you like more details?'
+  }
+
+  if (lower.includes('nad')) {
+    const p = PRODUCTS.find((x) => x.name?.includes('NAD'))
+    if (p) return `${p.name} (${p.code}) — ${p.blurb} Would you like pricing?`
+    return 'NAD+ is a vital coenzyme supporting DNA repair and cellular energy. Available in 500mg, 1000mg and 1500mg formulations. Would you like more details?'
+  }
+
+  if (lower.includes('mots')) {
+    const p = PRODUCTS.find((x) => x.name?.includes('MOTS'))
+    if (p) return `${p.name} (${p.code}) — ${p.blurb} Would you like pricing?`
+    return 'MOTS-C is a mitochondrial-derived peptide. Research-grade purity >99%. Would you like specifications?'
+  }
+
+  if (lower.includes('ipamorelin')) {
+    const p = PRODUCTS.find((x) => x.name?.includes('Ipamorelin'))
+    if (p) return `${p.name} (${p.code}) — ${p.blurb} Would you like pricing?`
+    return 'Ipamorelin is a growth-hormone secretagogue. Purity >99%. Would you like more details?'
+  }
+
+  if (lower.includes('tesamorelin')) {
+    const p = PRODUCTS.find((x) => x.name?.includes('Tesamorelin'))
+    if (p) return `${p.name} (${p.code}) — ${p.blurb} Would you like pricing?`
+    return 'Tesamorelin is a GHRH analog. Research use. Purity >99%. Would you like specifications?'
+  }
+
+  if (lower.includes('hgh') || lower.includes('growth hormone')) {
+    const p = PRODUCTS.find((x) => x.name?.includes('GenX-Tropin') || x.name?.includes('Libratropin'))
+    if (p) return `${p.name} (${p.code}) — ${p.blurb} Would you like pricing?`
+    return 'We offer several HGH/somatropin formulations. Would you like to see the full list?'
+  }
+
+  if (lower.includes('melanotan') || lower.includes('mt2')) {
+    const p = PRODUCTS.find((x) => x.name?.includes('MT2') || x.name?.includes('Melanotan'))
+    if (p) return `${p.name} (${p.code}) — ${p.blurb} Would you like pricing?`
+    return 'Melanotan II nasal spray is available in advanced formula. Would you like more details?'
+  }
+
+  if (lower.includes('ghk') || lower.includes('copper')) {
+    const p = PRODUCTS.find((x) => x.name?.includes('GHK'))
+    if (p) return `${p.name} (${p.code}) — ${p.blurb} Would you like pricing?`
+    return 'GHK-CU is a copper-binding peptide studied for skin, hair and tissue remodeling. Would you like more details?'
+  }
+
+  if (lower.includes('glow')) {
+    const p = PRODUCTS.find((x) => x.name?.includes('Glow'))
+    if (p) return `${p.name} (${p.code}) — ${p.blurb} Would you like pricing?`
+    return 'Glow GHK-CU Repair Blend combines GHK-CU, BPC-157 and TB-500 for comprehensive rejuvenation research. Would you like details?'
+  }
+
+  if (lower.includes('wolverine')) {
+    const p = PRODUCTS.find((x) => x.name?.includes('Wolverine'))
+    if (p) return `${p.name} (${p.code}) — ${p.blurb} Would you like pricing?`
+    return 'Wolverine Blend is the classic repair stack: 5mg BPC-157 + 5mg TB-500. Would you like more details?'
+  }
+
+  if (lower.includes('repair') || lower.includes('cartridge')) {
+    const p = PRODUCTS.find((x) => x.name?.includes('Repair'))
+    if (p) return `${p.name} (${p.code}) — ${p.blurb} Would you like pricing?`
+    return 'VLS Repair+ is a dual-cartridge system with BPC-157 and TB-500. Would you like specifications?'
+  }
+
+  return 'Thank you for your inquiry. For detailed technical questions, I recommend speaking with our team directly. Would you like me to connect you via WhatsApp?'
+}
 
 export default function ChatbotWidget() {
   const [isOpen, setIsOpen] = useState(false)
@@ -28,7 +156,7 @@ export default function ChatbotWidget() {
     scrollToBottom()
   }, [messages])
 
-  const handleSend = async (text) => {
+  const handleSend = (text) => {
     if (!text.trim()) return
 
     const userMessage = {
@@ -38,43 +166,23 @@ export default function ChatbotWidget() {
       timestamp: new Date(),
     }
 
-    setMessages(prev => [...prev, userMessage])
+    setMessages((prev) => [...prev, userMessage])
     setInput('')
     setIsTyping(true)
 
-    try {
-      const response = await fetch('/api/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          messages: [...messages, userMessage],
-          systemPrompt: SYSTEM_PROMPT,
-          knowledgeBase: KNOWLEDGE_BASE
-        })
-      })
-
-      const data = await response.json()
+    setTimeout(() => {
+      const reply = getLocalReply(text)
 
       const assistantMessage = {
         id: Date.now() + 1,
         role: 'assistant',
-        content: data.reply || 'I apologize, but I encountered an issue. Please try again or contact us directly.',
+        content: reply,
         timestamp: new Date(),
       }
 
-      setMessages(prev => [...prev, assistantMessage])
-    } catch (error) {
-      // Fallback to rule-based response
-      const fallbackReply = getFallbackResponse(text)
-      setMessages(prev => [...prev, {
-        id: Date.now() + 1,
-        role: 'assistant',
-        content: fallbackReply,
-        timestamp: new Date(),
-      }])
-    } finally {
+      setMessages((prev) => [...prev, assistantMessage])
       setIsTyping(false)
-    }
+    }, 600 + Math.random() * 400)
   }
 
   const handleWhatsAppRedirect = (productName) => {
@@ -86,7 +194,6 @@ export default function ChatbotWidget() {
 
   return (
     <>
-      {/* Floating Toggle Button */}
       <motion.button
         onClick={() => setIsOpen(!isOpen)}
         className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full flex items-center justify-center shadow-lg"
@@ -98,7 +205,6 @@ export default function ChatbotWidget() {
         {isOpen ? <X size={24} color="#000" /> : <MessageCircle size={24} color="#000" />}
       </motion.button>
 
-      {/* Chat Window */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -108,7 +214,6 @@ export default function ChatbotWidget() {
             transition={{ duration: 0.3, ease: [0.25, 1, 0.5, 1] }}
             className="fixed bottom-24 right-6 z-50 w-[380px] max-h-[600px] bg-[#0A0A0A] border border-white/10 rounded-lg shadow-2xl flex flex-col overflow-hidden"
           >
-            {/* Header */}
             <div className="px-4 py-3 border-b border-white/10 flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <div className="w-8 h-8 rounded-md bg-zinc-900 border border-white/10 flex items-center justify-center">
@@ -127,7 +232,6 @@ export default function ChatbotWidget() {
               </button>
             </div>
 
-            {/* Messages */}
             <div className="flex-1 overflow-y-auto p-4 space-y-3">
               <AnimatePresence mode="popLayout">
                 {messages.map((msg) => (
@@ -163,7 +267,6 @@ export default function ChatbotWidget() {
               <div ref={messagesEndRef} />
             </div>
 
-            {/* Quick Replies */}
             <div className="px-4 py-2 border-t border-white/10">
               <div className="flex flex-wrap gap-1.5">
                 {QUICK_REPLIES.map((reply) => (
@@ -178,7 +281,6 @@ export default function ChatbotWidget() {
               </div>
             </div>
 
-            {/* Input */}
             <div className="px-4 py-3 border-t border-white/10">
               <form
                 onSubmit={(e) => {
@@ -209,42 +311,4 @@ export default function ChatbotWidget() {
       </AnimatePresence>
     </>
   )
-}
-
-/**
- * Fallback rule-based response system
- * Used when LLM API is unavailable
- */
-export function getFallbackResponse(query: string): string {
-  const lower = query.toLowerCase()
-
-  if (lower.includes('price') || lower.includes('cost') || lower.includes('pricing')) {
-    return 'Pricing is available on request via WhatsApp. Would you like me to open a chat for you?'
-  }
-
-  if (lower.includes('ship') || lower.includes('delivery') || lower.includes('shipping')) {
-    return 'We ship discreetly with temperature-controlled packaging. Lead time is 3-5 business days after confirmation. Would you like more details?'
-  }
-
-  if (lower.includes('verif') || lower.includes('lab') || lower.includes('test') || lower.includes('purity')) {
-    return 'All MR PEPTIDES products are independently tested. Stability checkpoints are third-party verified by Janoshik. Purity standards are published for every batch.'
-  }
-
-  if (lower.includes('store') || lower.includes('storage') || lower.includes('refrigerat')) {
-    return 'Store refrigerated at 2°C to 8°C unless otherwise specified on the product label. Do not freeze.'
-  }
-
-  if (lower.includes('retatrutide')) {
-    return 'Retatrutide is a triple GLP-1/GIP/glucagon agonist. Available in 20mg and 40mg prefilled pen formulations. 56-day room-temperature stability. Alluvi Healthcare manufactured. Would you like specifications or pricing?'
-  }
-
-  if (lower.includes('tirzepatide')) {
-    return 'Tirzepatide is a dual GLP-1/GIP receptor agonist. Available in 40mg and 20mg formulations. For subcutaneous injection only. Store refrigerated. Would you like more details?'
-  }
-
-  if (lower.includes('bpc') || lower.includes('tb-500')) {
-    return 'BPC-157 and TB-500 are recovery and repair peptides. We offer several formulations including standalone and blended products. Would you like to see the full catalog?'
-  }
-
-  return 'Thank you for your inquiry. For detailed technical questions, I recommend speaking with our team directly. Would you like me to connect you via WhatsApp?'
 }

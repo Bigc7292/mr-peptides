@@ -10,6 +10,7 @@ import Footer from './components/Footer'
 import FloatingCTA from './components/FloatingCTA'
 import ScrollProgress from './components/ScrollProgress'
 import Preloader from './components/Preloader'
+import ChatbotWidget from './components/chatbot/ChatbotWidget'
 
 export default function App() {
   const [selectedProduct, setSelectedProduct] = useState('')
@@ -45,6 +46,7 @@ export default function App() {
       </main>
       <Footer onNavigate={onNavigate} />
       <FloatingCTA />
+      <ChatbotWidget />
     </div>
   )
 }

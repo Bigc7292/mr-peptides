@@ -137,13 +137,13 @@ export default function Hero({ onNavigate }) {
                 className="relative w-[280px] sm:w-[340px] md:w-[380px] aspect-square bg-[#0c0c0c] border border-white/10 overflow-hidden"
               >
                 <img
-                  src="/mascot.png"
-                  alt="Mascot"
-                  className="w-full h-full object-cover"
+                  src="/products/main-product.jpg"
+                  alt="Retatrutide Triple Agonist - Main Product"
+                  className="w-full h-full object-contain"
                 />
                 <div className="absolute bottom-0 left-0 right-0 p-3 flex justify-between text-[10px] uppercase tracking-widest text-zinc-500 bg-gradient-to-t from-black/80 to-transparent">
-                  <span>Swole Patrol Unit 01</span>
-                  <span>Est. MMXXVI</span>
+                  <span>Featured Product</span>
+                  <span>Alluvi Healthcare</span>
                 </div>
               </motion.div>
             </div>

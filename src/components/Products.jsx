@@ -1,4 +1,4 @@
-import { useState, useMemo, useRef } from 'react'
+import { useState, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { PRODUCTS, CATEGORIES } from '../data/products'
 import { waLink } from '../config'
@@ -20,11 +20,8 @@ const cardVariants = {
 }
 
 function ProductCard({ p }) {
-  const cardRef = useRef(null)
-
   const handleMouseMove = (e) => {
-    const el = cardRef.current
-    if (!el) return
+    const el = e.currentTarget
     const rect = el.getBoundingClientRect()
     const x = e.clientX - rect.left
     const y = e.clientY - rect.top
@@ -34,7 +31,6 @@ function ProductCard({ p }) {
 
   return (
     <motion.article
-      ref={cardRef}
       key={p.id}
       layout
       variants={cardVariants}
@@ -71,15 +67,22 @@ function ProductCard({ p }) {
           ))}
         </div>
       )}
-      <div className="p-5 flex-1 flex flex-col">
-        <div className="flex items-start justify-between gap-3 mb-3">
-          <span className="text-[10px] font-mono text-zinc-600 tracking-wider">
-            {p.code}
-          </span>
-          <span className="text-[10px] uppercase tracking-wider text-zinc-500 border border-white/10 px-2 py-0.5">
-            {p.category}
-          </span>
-        </div>
+        <div className="p-5 flex-1 flex flex-col">
+          <div className="flex items-start justify-between gap-3 mb-3">
+            <span className="text-[10px] font-mono text-zinc-600 tracking-wider">
+              {p.code}
+            </span>
+            <div className="flex gap-1.5">
+              {p.tags.includes('Featured') && (
+                <span className="text-[10px] uppercase tracking-wider text-accent border border-accent/30 px-2 py-0.5">
+                  Featured
+                </span>
+              )}
+              <span className="text-[10px] uppercase tracking-wider text-zinc-500 border border-white/10 px-2 py-0.5">
+                {p.category}
+              </span>
+            </div>
+          </div>
         <h3 className="text-base font-bold leading-snug mb-1.5 group-hover:text-accent transition-colors">
           {p.name}
         </h3>
@@ -179,6 +182,47 @@ export default function Products({ onRequestPrice }) {
                   {c}
                 </button>
               ))}
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Featured product banner */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-40px' }}
+          transition={{ duration: 0.7, ease: [0.25, 1, 0.5, 1] }}
+          className="mb-12 p-6 md:p-8 border border-accent/30 bg-accent/5 relative overflow-hidden"
+        >
+          <div className="absolute inset-0 bg-gradient-to-r from-accent/10 via-transparent to-accent/10" />
+          <div className="relative flex flex-col md:flex-row gap-6 items-center">
+            <div className="w-full md:w-1/3">
+              <img
+                src="/products/main-product.jpg"
+                alt="Featured Product"
+                className="w-full h-48 object-contain"
+              />
+            </div>
+            <div className="flex-1 text-center md:text-left">
+              <span className="text-[10px] uppercase tracking-[0.3em] text-accent border border-accent/30 px-3 py-1">
+                Featured Product
+              </span>
+              <h3 className="text-2xl md:text-3xl font-black tracking-tight mt-3 mb-2">
+                Retatrutide Triple Agonist
+              </h3>
+              <p className="text-zinc-400 text-sm mb-4 max-w-xl">
+                Our flagship compound. Triple agonist targeting GLP-1, GIP and glucagon receptors 
+                for advanced weight-management research. 56-day room-temperature stability with 
+                Janoshik-verified purity. Alluvi Healthcare manufactured.
+              </p>
+              <a
+                href={waLink("Hi MR PEPTIDES — I'd like pricing for Retatrutide Triple Agonist (RP-02).")}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block px-6 py-3 bg-accent text-black text-sm font-semibold uppercase tracking-wider hover:bg-orange-500 transition-colors glow-border"
+              >
+                Request Pricing
+              </a>
             </div>
           </div>
         </motion.div>

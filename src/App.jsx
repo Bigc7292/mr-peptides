@@ -4,8 +4,12 @@ import Hero from './components/Hero'
 import Manifesto from './components/Manifesto'
 import Stacks from './components/Stacks'
 import Products from './components/Products'
+import ProductCarousel from './components/ProductCarousel'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
+import FloatingCTA from './components/FloatingCTA'
+import ScrollProgress from './components/ScrollProgress'
+import Preloader from './components/Preloader'
 
 export default function App() {
   const [selectedProduct, setSelectedProduct] = useState('')
@@ -25,18 +29,22 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-black text-white">
+      <ScrollProgress />
+      <Preloader />
       <Header onNavigate={onNavigate} />
       <main>
         <Hero onNavigate={onNavigate} />
         <Manifesto />
         <Stacks />
         <Products onRequestPrice={onRequestPrice} />
+        <ProductCarousel />
         <Contact
           selectedProduct={selectedProduct}
           onProductChange={setSelectedProduct}
         />
       </main>
       <Footer onNavigate={onNavigate} />
+      <FloatingCTA />
     </div>
   )
 }

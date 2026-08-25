@@ -116,3 +116,32 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #ea580c;
 }
+
+/* Chatbot mobile tweaks */
+@media (max-width: 767px) {
+  .chatbot-toggle-btn {
+    background-color: #000 !important;
+    border: 2px solid #fff;
+  }
+  .chatbot-toggle-btn:hover {
+    background-color: #111 !important;
+  }
+  .chatbot-toggle-btn svg {
+    color: #fff !important;
+    stroke: #fff !important;
+  }
+  .chatbot-window {
+    width: calc(100vw - 32px) !important;
+    right: 16px !important;
+    bottom: 80px !important;
+    max-height: 70vh !important;
+  }
+}
+
+/* Chatbot desktop icon color */
+@media (min-width: 768px) {
+  .chatbot-toggle-btn svg {
+    color: #000 !important;
+    stroke: #000 !important;
+  }
+}

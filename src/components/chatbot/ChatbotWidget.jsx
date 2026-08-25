@@ -359,13 +359,12 @@ export default function ChatbotWidget() {
     <>
       <motion.button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full flex items-center justify-center shadow-lg"
-        style={{ backgroundColor: ACCENT }}
+        className="chatbot-toggle-btn fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full flex items-center justify-center shadow-lg md:bg-accent"
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         aria-label="Open chat"
       >
-        {isOpen ? <X size={24} color="#000" /> : <MessageCircle size={24} color="#000" />}
+        {isOpen ? <X size={24} /> : <MessageCircle size={24} />}
       </motion.button>
 
       <AnimatePresence>
@@ -375,7 +374,7 @@ export default function ChatbotWidget() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.3, ease: [0.25, 1, 0.5, 1] }}
-            className="fixed bottom-24 right-6 z-50 w-[380px] max-h-[600px] bg-[#0A0A0A] border border-white/10 rounded-lg shadow-2xl flex flex-col overflow-hidden"
+            className="chatbot-window fixed bottom-24 right-6 z-50 w-[380px] max-h-[600px] bg-[#0A0A0A] border border-white/10 rounded-lg shadow-2xl flex flex-col overflow-hidden"
           >
             <div className="px-4 py-3 border-b border-white/10 flex items-center justify-between">
               <div className="flex items-center gap-2">

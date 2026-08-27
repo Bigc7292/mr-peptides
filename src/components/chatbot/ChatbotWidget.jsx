@@ -3,17 +3,17 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { MessageCircle, X, Send, Loader2 } from 'lucide-react'
 import { PRODUCTS, CATEGORIES } from '../../data/products'
 import { QUICK_REPLIES, BRAND_COLORS } from '../../config/chatbot-config'
-import { waLink } from '../../config'
+import { tgMessageLink } from '../../config'
 
 const ACCENT = BRAND_COLORS.accent
 
 const GREETING = 'Welcome to MR PEPTIDES. How can I assist with your research inquiry?'
 
-const OFFER_WHATSAPP = 'Pricing is available on request via WhatsApp. Would you like me to open a chat for you?'
-const OFFER_WHATSAPP_ALTS = [
-  'For pricing, I can connect you directly via WhatsApp.',
-  'I can open a WhatsApp chat for pricing on this product.',
-  'Shall I open a WhatsApp chat to discuss pricing?',
+const OFFER_TELEGRAM = 'Pricing is available on request via Telegram. Would you like me to open a chat for you?'
+const OFFER_TELEGRAM_ALTS = [
+  'For pricing, I can connect you directly via Telegram.',
+  'I can open a Telegram chat for pricing on this product.',
+  'Shall I open a Telegram chat to discuss pricing?',
 ]
 
 const AFFIRMATIVES = new Set([
@@ -55,12 +55,12 @@ function findProduct(query) {
 function getLocalReply(query, context) {
   const lower = query.toLowerCase()
 
-  if (context.pendingWhatsApp) {
+  if (context.pendingTelegram) {
     if (isAffirmative(lower)) {
       return {
-        text: 'Opening WhatsApp now.',
-        action: 'whatsapp',
-        product: context.pendingWhatsAppProduct || null,
+        text: 'Opening Telegram now.',
+        action: 'telegram',
+        product: context.pendingTelegramProduct || null,
         clearContext: true,
       }
     }
@@ -77,18 +77,18 @@ function getLocalReply(query, context) {
     if (matched) {
       return {
         text: choose([
-          `${matched.name} (${matched.code}) pricing is available on request. Would you like me to open WhatsApp?`,
-          OFFER_WHATSAPP,
+          `${matched.name} (${matched.code}) pricing is available on request. Would you like me to open Telegram?`,
+          OFFER_TELEGRAM,
         ]),
-        action: 'pending_whatsapp',
-        pendingWhatsAppProduct: matched.name,
-        setPendingWhatsApp: true,
+        action: 'pending_telegram',
+        pendingTelegramProduct: matched.name,
+        setPendingTelegram: true,
       }
     }
     return {
-      text: choose(OFFER_WHATSAPP_ALTS),
-      action: 'pending_whatsapp',
-      setPendingWhatsApp: true,
+      text: choose(OFFER_TELEGRAM_ALTS),
+      action: 'pending_telegram',
+      setPendingTelegram: true,
     }
   }
 
@@ -114,9 +114,9 @@ function getLocalReply(query, context) {
     const featured = PRODUCTS.find((p) => p.tags?.includes('Featured')) || PRODUCTS[0]
     return {
       text: `Our featured product is ${featured.name} (${featured.code}). ${featured.blurb}. Would you like pricing?`,
-      action: 'pending_whatsapp',
-      pendingWhatsAppProduct: featured.name,
-      setPendingWhatsApp: true,
+      action: 'pending_telegram',
+      pendingTelegramProduct: featured.name,
+      setPendingTelegram: true,
     }
   }
 
@@ -145,17 +145,17 @@ function getLocalReply(query, context) {
     const imgNote = matched.images?.length ? ` Image count: ${matched.images.length}.` : ''
     return {
       text: `${matched.name} (${matched.code}) — ${matched.blurb}${imgNote} Would you like pricing?`,
-      action: 'pending_whatsapp',
-      pendingWhatsAppProduct: matched.name,
-      setPendingWhatsApp: true,
+      action: 'pending_telegram',
+      pendingTelegramProduct: matched.name,
+      setPendingTelegram: true,
     }
   }
 
   if (lower.includes('retatrutide')) {
     return {
       text: 'Retatrutide is a triple GLP-1/GIP/glucagon agonist. Available in 20mg and 40mg prefilled pen formulations. 56-day room-temperature stability. Alluvi Healthcare manufactured. Would you like specifications or pricing?',
-      action: 'pending_whatsapp',
-      setPendingWhatsApp: true,
+      action: 'pending_telegram',
+      setPendingTelegram: true,
     }
   }
 
@@ -167,79 +167,79 @@ function getLocalReply(query, context) {
 
   if (lower.includes('bpc')) {
     const p = PRODUCTS.find((x) => x.name?.includes('BPC'))
-    if (p) return { text: `${p.name} (${p.code}) — ${p.blurb} Would you like pricing?`, action: 'pending_whatsapp', pendingWhatsAppProduct: p.name, setPendingWhatsApp: true }
+    if (p) return { text: `${p.name} (${p.code}) — ${p.blurb} Would you like pricing?`, action: 'pending_telegram', pendingTelegramProduct: p.name, setPendingTelegram: true }
     return { text: 'BPC-157 is a recovery and repair peptide. We offer standalone and blended formulations. Would you like to see the full catalog?' }
   }
 
   if (lower.includes('tb-500')) {
     const p = PRODUCTS.find((x) => x.name?.includes('TB-500'))
-    if (p) return { text: `${p.name} (${p.code}) — ${p.blurb} Would you like pricing?`, action: 'pending_whatsapp', pendingWhatsAppProduct: p.name, setPendingWhatsApp: true }
+    if (p) return { text: `${p.name} (${p.code}) — ${p.blurb} Would you like pricing?`, action: 'pending_telegram', pendingTelegramProduct: p.name, setPendingTelegram: true }
     return { text: 'TB-500 is a recovery peptide commonly paired with BPC-157. Would you like to see available formulations?' }
   }
 
   if (lower.includes('semaglutide')) {
     const p = PRODUCTS.find((x) => x.name?.includes('Semaglutide'))
-    if (p) return { text: `${p.name} (${p.code}) — ${p.blurb} Would you like pricing?`, action: 'pending_whatsapp', pendingWhatsAppProduct: p.name, setPendingWhatsApp: true }
+    if (p) return { text: `${p.name} (${p.code}) — ${p.blurb} Would you like pricing?`, action: 'pending_telegram', pendingTelegramProduct: p.name, setPendingTelegram: true }
     return { text: 'Semaglutide is a GLP-1 receptor agonist. Available in prefilled pen formulations. Would you like more details?' }
   }
 
   if (lower.includes('nad')) {
     const p = PRODUCTS.find((x) => x.name?.includes('NAD'))
-    if (p) return { text: `${p.name} (${p.code}) — ${p.blurb} Would you like pricing?`, action: 'pending_whatsapp', pendingWhatsAppProduct: p.name, setPendingWhatsApp: true }
+    if (p) return { text: `${p.name} (${p.code}) — ${p.blurb} Would you like pricing?`, action: 'pending_telegram', pendingTelegramProduct: p.name, setPendingTelegram: true }
     return { text: 'NAD+ is a vital coenzyme supporting DNA repair and cellular energy. Available in 500mg, 1000mg and 1500mg formulations. Would you like more details?' }
   }
 
   if (lower.includes('mots')) {
     const p = PRODUCTS.find((x) => x.name?.includes('MOTS'))
-    if (p) return { text: `${p.name} (${p.code}) — ${p.blurb} Would you like pricing?`, action: 'pending_whatsapp', pendingWhatsAppProduct: p.name, setPendingWhatsApp: true }
+    if (p) return { text: `${p.name} (${p.code}) — ${p.blurb} Would you like pricing?`, action: 'pending_telegram', pendingTelegramProduct: p.name, setPendingTelegram: true }
     return { text: 'MOTS-C is a mitochondrial-derived peptide. Research-grade purity >99%. Would you like specifications?' }
   }
 
   if (lower.includes('ipamorelin')) {
     const p = PRODUCTS.find((x) => x.name?.includes('Ipamorelin'))
-    if (p) return { text: `${p.name} (${p.code}) — ${p.blurb} Would you like pricing?`, action: 'pending_whatsapp', pendingWhatsAppProduct: p.name, setPendingWhatsApp: true }
+    if (p) return { text: `${p.name} (${p.code}) — ${p.blurb} Would you like pricing?`, action: 'pending_telegram', pendingTelegramProduct: p.name, setPendingTelegram: true }
     return { text: 'Ipamorelin is a growth-hormone secretagogue. Purity >99%. Would you like more details?' }
   }
 
   if (lower.includes('tesamorelin')) {
     const p = PRODUCTS.find((x) => x.name?.includes('Tesamorelin'))
-    if (p) return { text: `${p.name} (${p.code}) — ${p.blurb} Would you like pricing?`, action: 'pending_whatsapp', pendingWhatsAppProduct: p.name, setPendingWhatsApp: true }
+    if (p) return { text: `${p.name} (${p.code}) — ${p.blurb} Would you like pricing?`, action: 'pending_telegram', pendingTelegramProduct: p.name, setPendingTelegram: true }
     return { text: 'Tesamorelin is a GHRH analog. Research use. Purity >99%. Would you like specifications?' }
   }
 
   if (lower.includes('hgh') || lower.includes('growth hormone')) {
     const p = PRODUCTS.find((x) => x.name?.includes('GenX-Tropin') || x.name?.includes('Libratropin'))
-    if (p) return { text: `${p.name} (${p.code}) — ${p.blurb} Would you like pricing?`, action: 'pending_whatsapp', pendingWhatsAppProduct: p.name, setPendingWhatsApp: true }
+    if (p) return { text: `${p.name} (${p.code}) — ${p.blurb} Would you like pricing?`, action: 'pending_telegram', pendingTelegramProduct: p.name, setPendingTelegram: true }
     return { text: 'We offer several HGH/somatropin formulations. Would you like to see the full list?' }
   }
 
   if (lower.includes('melanotan') || lower.includes('mt2')) {
     const p = PRODUCTS.find((x) => x.name?.includes('MT2') || x.name?.includes('Melanotan'))
-    if (p) return { text: `${p.name} (${p.code}) — ${p.blurb} Would you like pricing?`, action: 'pending_whatsapp', pendingWhatsAppProduct: p.name, setPendingWhatsApp: true }
+    if (p) return { text: `${p.name} (${p.code}) — ${p.blurb} Would you like pricing?`, action: 'pending_telegram', pendingTelegramProduct: p.name, setPendingTelegram: true }
     return { text: 'Melanotan II nasal spray is available in advanced formula. Would you like more details?' }
   }
 
   if (lower.includes('ghk') || lower.includes('copper peptide')) {
     const p = PRODUCTS.find((x) => x.name?.includes('GHK'))
-    if (p) return { text: `${p.name} (${p.code}) — ${p.blurb} Would you like pricing?`, action: 'pending_whatsapp', pendingWhatsAppProduct: p.name, setPendingWhatsApp: true }
+    if (p) return { text: `${p.name} (${p.code}) — ${p.blurb} Would you like pricing?`, action: 'pending_telegram', pendingTelegramProduct: p.name, setPendingTelegram: true }
     return { text: 'GHK-CU is a copper-binding peptide studied for skin, hair and tissue remodeling. Would you like more details?' }
   }
 
   if (lower.includes('glow')) {
     const p = PRODUCTS.find((x) => x.name?.includes('Glow'))
-    if (p) return { text: `${p.name} (${p.code}) — ${p.blurb} Would you like pricing?`, action: 'pending_whatsapp', pendingWhatsAppProduct: p.name, setPendingWhatsApp: true }
+    if (p) return { text: `${p.name} (${p.code}) — ${p.blurb} Would you like pricing?`, action: 'pending_telegram', pendingTelegramProduct: p.name, setPendingTelegram: true }
     return { text: 'Glow GHK-CU Repair Blend combines GHK-CU, BPC-157 and TB-500 for comprehensive rejuvenation research. Would you like details?' }
   }
 
   if (lower.includes('wolverine')) {
     const p = PRODUCTS.find((x) => x.name?.includes('Wolverine'))
-    if (p) return { text: `${p.name} (${p.code}) — ${p.blurb} Would you like pricing?`, action: 'pending_whatsapp', pendingWhatsAppProduct: p.name, setPendingWhatsApp: true }
+    if (p) return { text: `${p.name} (${p.code}) — ${p.blurb} Would you like pricing?`, action: 'pending_telegram', pendingTelegramProduct: p.name, setPendingTelegram: true }
     return { text: 'Wolverine Blend is the classic repair stack: 5mg BPC-157 + 5mg TB-500. Would you like more details?' }
   }
 
   if (lower.includes('repair') || lower.includes('cartridge')) {
     const p = PRODUCTS.find((x) => x.name?.includes('Repair'))
-    if (p) return { text: `${p.name} (${p.code}) — ${p.blurb} Would you like pricing?`, action: 'pending_whatsapp', pendingWhatsAppProduct: p.name, setPendingWhatsApp: true }
+    if (p) return { text: `${p.name} (${p.code}) — ${p.blurb} Would you like pricing?`, action: 'pending_telegram', pendingTelegramProduct: p.name, setPendingTelegram: true }
     return { text: 'VLS Repair+ is a dual-cartridge system with BPC-157 and TB-500. Would you like specifications?' }
   }
 
@@ -265,9 +265,9 @@ function getLocalReply(query, context) {
 
   if (lower.includes('contact') || lower.includes('email') || lower.includes('phone')) {
     return {
-      text: 'You can reach us via WhatsApp or Telegram. Would you like me to open a chat?',
-      action: 'pending_whatsapp',
-      setPendingWhatsApp: true,
+      text: 'You can reach us via Telegram. Would you like me to open a chat?',
+      action: 'pending_telegram',
+      setPendingTelegram: true,
     }
   }
 
@@ -280,9 +280,9 @@ function getLocalReply(query, context) {
   }
 
   return {
-    text: 'Thank you for your inquiry. For detailed technical questions, I recommend speaking with our team directly. Would you like me to connect you via WhatsApp?',
-    action: 'pending_whatsapp',
-    setPendingWhatsApp: true,
+    text: 'Thank you for your inquiry. For detailed technical questions, I recommend speaking with our team directly. Would you like me to connect you via Telegram?',
+    action: 'pending_telegram',
+    setPendingTelegram: true,
   }
 }
 
@@ -298,7 +298,7 @@ export default function ChatbotWidget() {
   ])
   const [input, setInput] = useState('')
   const [isTyping, setIsTyping] = useState(false)
-  const [context, setContext] = useState({ pendingWhatsApp: false, pendingWhatsAppProduct: null })
+  const [context, setContext] = useState({ pendingTelegram: false, pendingTelegramProduct: null })
   const messagesEndRef = useRef(null)
 
   const scrollToBottom = () => {
@@ -340,17 +340,17 @@ export default function ChatbotWidget() {
       addMessages(assistantMessage)
       setIsTyping(false)
 
-      if (result.action === 'whatsapp') {
+      if (result.action === 'telegram') {
         const productName = result.product || ''
         const message = productName
           ? `Hi MR PEPTIDES — I'd like pricing for ${productName}.`
           : "Hi MR PEPTIDES — I'd like pricing on your products."
-        window.open(waLink(message), '_blank', 'noopener,noreferrer')
+        window.open(tgMessageLink(message), '_blank', 'noopener,noreferrer')
       }
 
       setContext((prev) => ({
-        pendingWhatsApp: result.setPendingWhatsApp ? true : result.clearContext ? false : prev.pendingWhatsApp,
-        pendingWhatsAppProduct: result.pendingWhatsAppProduct || prev.pendingWhatsAppProduct,
+        pendingTelegram: result.setPendingTelegram ? true : result.clearContext ? false : prev.pendingTelegram,
+        pendingTelegramProduct: result.pendingTelegramProduct || prev.pendingTelegramProduct,
       }))
     }, 600 + Math.random() * 400)
   }

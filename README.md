@@ -9,7 +9,7 @@ A full rebuild of the [MR PEPTIDES](https://mr-peptides-promo.preview.emergentag
 - **The Standard** manifesto (purity / stability / third-party verification)
 - Goal-based **Stacks** (Fat Loss, Muscle Growth, Cognitive Focus)
 - Full **Catalog** with search + category filters (17 research compounds)
-- **Contact / pricing** form that opens WhatsApp with a pre-filled message
+- **Contact / pricing** form that opens Telegram with a pre-filled message
 - Sticky header, smooth section navigation, research-use disclaimer
 - Mobile responsive
 
@@ -37,8 +37,7 @@ Output is in `dist/`. Deploy that folder to any static host (Vercel, Netlify, Cl
 Edit `src/config.js`:
 
 ```js
-export const WHATSAPP_NUMBER = '15551234567'  // digits only, country code
-export const TELEGRAM_HANDLE = 'mrpeptides'
+export const TELEGRAM_HANDLE = 'mr_peptides'
 ```
 
 Update product data in `src/data/products.js`.
@@ -54,4 +53,4 @@ Update product data in `src/data/products.js`.
 
 - All compounds are labeled **research use only**.
 - Pricing is request-only (no cart / checkout).
-- Contact form opens WhatsApp; no backend is required. Add an API later if you want enquiries stored in a CRM.
+- Contact form opens Telegram; no backend is required. Add an API later if you want enquiries stored in a CRM.

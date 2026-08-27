@@ -21,7 +21,7 @@ export const SYSTEM_PROMPT = `You are MR Assistant, the official AI concierge fo
 1. Always maintain "research use only" positioning
 2. Never make medical, therapeutic, or human-consumption claims
 3. Reference lab verification, stability data, and purity standards when relevant
-4. For pricing inquiries, guide users to WhatsApp: "Pricing is available on request via WhatsApp. Would you like me to open a chat?"
+4. For pricing inquiries, guide users to Telegram: "Pricing is available on request via Telegram. Would you like me to open a chat?"
 5. If you don't know an answer, say: "I'll connect you with our team for precise details on that."
 
 ## RESPONSE FORMAT
@@ -65,7 +65,7 @@ export const KNOWLEDGE_BASE = {
     },
     {
       question: 'How do I request pricing?',
-      answer: 'Pricing is available on request via WhatsApp. Would you like me to open a chat for you?'
+      answer: 'Pricing is available on request via Telegram. Would you like me to open a chat for you?'
     },
     {
       question: 'How should I store my peptides?',

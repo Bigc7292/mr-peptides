@@ -155,7 +155,7 @@ You are MR Assistant, the official AI concierge for MR PEPTIDES — a premier su
 1. Always maintain "research use only" positioning
 2. Never make medical, therapeutic, or human-consumption claims
 3. Reference lab verification, stability data, and purity standards when relevant
-4. For pricing inquiries, guide users to WhatsApp: "Pricing is available on request via WhatsApp. Would you like me to open a chat?"
+4. For pricing inquiries, guide users to Telegram: "Pricing is available on request via Telegram. Would you like me to open a chat?"
 5. If you don't know an answer, say: "I'll connect you with our team for precise details on that."
 
 ## KNOWLEDGE BASE SNIPPETS
@@ -175,7 +175,7 @@ You are MR Assistant, the official AI concierge for MR PEPTIDES — a premier su
 
 | Scenario | Good Response | Bad Response |
 |----------|---------------|--------------|
-| Pricing inquiry | "Pricing is on request per our research-grade pricing policy. Shall I open a WhatsApp chat for you?" | "Hey! Our prices are super cheap, wanna buy?" |
+| Pricing inquiry | "Pricing is on request per our research-grade pricing policy. Shall I open a Telegram chat for you?" | "Hey! Our prices are super cheap, wanna buy?" |
 | Product inquiry | "Retatrutide is a triple GLP-1/GIP/glucagon agonist. 40mg prefilled pen, 56-day stability at room temperature." | "It's like, really good for weight loss stuff!" |
 | Shipping question | "We ship discreetly with temperature control. Lead time is 3-5 business days after confirmation." | "We ship super fast everywhere!" |
 | Out of scope | "I'll connect you with our team for precise details on that." | "I don't know, maybe Google it?" |
@@ -355,7 +355,7 @@ export const KNOWLEDGE_BASE = {
     },
     {
       question: 'How do I request pricing?',
-      answer: 'Pricing is available on request via WhatsApp. Would you like me to open a chat?'
+      answer: 'Pricing is available on request via Telegram. Would you like me to open a chat?'
     }
   ],
   policies: {
@@ -403,7 +403,7 @@ ${JSON.stringify(knowledgeBase.faqs, null, 2)}
 
 ## RESPONSE RULES
 - Only use the knowledge provided above
-- If asked about pricing, direct to WhatsApp
+- If asked about pricing, direct to Telegram
 - Always include research-use-only disclaimers
 - Keep responses under 150 words
 `
@@ -438,7 +438,7 @@ ${JSON.stringify(knowledgeBase.faqs, null, 2)}
 
   } catch (error) {
     return new Response(JSON.stringify({ 
-      reply: 'I apologize, but I am currently unable to process your request. Please contact us directly via WhatsApp.' 
+      reply: 'I apologize, but I am currently unable to process your request. Please contact us directly via Telegram.' 
     }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' }
@@ -457,7 +457,7 @@ export function getFallbackResponse(query: string): string {
   
   // Pricing
   if (lower.includes('price') || lower.includes('cost') || lower.includes('pricing')) {
-    return 'Pricing is available on request via WhatsApp. Would you like me to open a chat for you?'
+    return 'Pricing is available on request via Telegram. Would you like me to open a chat for you?'
   }
   
   // Shipping
@@ -476,7 +476,7 @@ export function getFallbackResponse(query: string): string {
   }
   
   // Default
-  return 'Thank you for your inquiry. For detailed technical questions, I recommend speaking with our team directly. Would you like me to connect you via WhatsApp?'
+  return 'Thank you for your inquiry. For detailed technical questions, I recommend speaking with our team directly. Would you like me to connect you via Telegram?'
 }
 ```
 
@@ -575,17 +575,17 @@ const getQuickReplies = (lastMessage: string) => {
     return ['Request pricing', 'Specifications', 'Storage guidelines']
   }
   if (lastMessage.includes('pricing')) {
-    return ['Open WhatsApp', 'View all products', 'Shipping info']
+    return ['Open Telegram', 'View all products', 'Shipping info']
   }
   return ['Browse products', 'Request pricing', 'Lab verification']
 }
 ```
 
-### 6.3 WhatsApp Integration
+### 6.3 Telegram Integration
 
 ```typescript
-// Pre-formatted WhatsApp messages
-export const WHATSAPP_TEMPLATES = {
+// Pre-formatted Telegram messages
+export const TELEGRAM_TEMPLATES = {
   pricing: (productName: string) => 
     `Hi MR PEPTIDES — I'd like pricing for ${productName}.`,
   
@@ -596,9 +596,9 @@ export const WHATSAPP_TEMPLATES = {
     `Hi MR PEPTIDES — Technical question: ${question}`
 }
 
-// Trigger WhatsApp with pre-filled message
-const openWhatsApp = (template: string) => {
-  window.open(waLink(template), '_blank', 'noopener,noreferrer')
+// Trigger Telegram with pre-filled message
+const openTelegram = (template: string) => {
+  window.open(tgMessageLink(template), '_blank', 'noopener,noreferrer')
 }
 ```
 
@@ -642,7 +642,7 @@ export function checkRateLimit(ip: string): boolean {
 - **No medical claims**: System prompt explicitly forbids therapeutic/medical language
 - **Research-only positioning**: All responses include implicit or explicit "research use only" framing
 - **No unauthorized commitments**: Chatbot cannot promise delivery dates, specific purity levels, or pricing
-- **Human handoff**: For complex inquiries, chatbot always offers WhatsApp/Telegram connection
+- **Human handoff**: For complex inquiries, chatbot always offers Telegram connection
 
 ---
 
@@ -652,7 +652,7 @@ export function checkRateLimit(ip: string): boolean {
 
 | Test Case | Expected Behavior |
 |-----------|------------------|
-| User asks for pricing | Directs to WhatsApp, no numbers shown |
+| User asks for pricing | Directs to Telegram, no numbers shown |
 | User asks about Retatrutide specs | Provides accurate product details from catalog |
 | User makes medical claim | Politely corrects to research framing |
 | User asks about shipping | Provides 3-5 day lead time, temperature control |
@@ -668,7 +668,7 @@ export function checkRateLimit(ip: string): boolean {
 - [ ] All technical terms spelled correctly
 - [ ] Research-use-only disclaimers present where appropriate
 - [ ] Responses under 150 words (unless technical deep-dive requested)
-- [ ] No pricing numbers shown (always redirect to WhatsApp)
+- [ ] No pricing numbers shown (always redirect to Telegram)
 
 ---
 
@@ -716,7 +716,7 @@ export async function getCachedResponse(query: string): Promise<string | null> {
 ### 10.1 Metrics to Track
 
 - **Engagement**: Open rate, message count, session duration
-- **Conversion**: WhatsApp click-through rate from chatbot
+- **Conversion**: Telegram click-through rate from chatbot
 - **Fallback rate**: How often fallback responses are used
 - **User satisfaction**: Thumbs up/down feedback
 - **Common queries**: Top questions to improve knowledge base
@@ -749,7 +749,7 @@ interface ChatLog {
 - [ ] Build ChatWindow, MessageList, MessageInput components
 - [ ] Implement API endpoint with LLM integration
 - [ ] Add fallback rule-based engine
-- [ ] Integrate WhatsApp link generation
+- [ ] Integrate Telegram link generation
 - [ ] Apply brand styling and animations
 - [ ] Add context-aware conversation logic
 

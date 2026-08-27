@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { MessageCircle, Send } from 'lucide-react'
+import { Send } from 'lucide-react'
 import { PRODUCTS } from '../data/products'
-import { waLink, tgLink } from '../config'
+import { tgMessageLink, tgLink } from '../config'
 
 export default function Contact({ selectedProduct, onProductChange }) {
   const [name, setName] = useState('')
@@ -17,7 +17,7 @@ export default function Contact({ selectedProduct, onProductChange }) {
     if (selectedProduct) setProduct(selectedProduct)
   }, [selectedProduct])
 
-  const waMessage = `Hi MR PEPTIDES — I'd like pricing${
+  const tgMessage = `Hi MR PEPTIDES — I'd like pricing${
     product ? ` for ${product}` : ' on your products'
   }.${name ? ` — ${name}` : ''}${contact ? ` (${contact})` : ''}${
     message ? `\n\n${message}` : ''
@@ -31,7 +31,7 @@ export default function Contact({ selectedProduct, onProductChange }) {
       return
     }
     setSending(true)
-    window.open(waLink(waMessage), '_blank', 'noopener,noreferrer')
+    window.open(tgMessageLink(tgMessage), '_blank', 'noopener,noreferrer')
     setTimeout(() => {
       setSending(false)
       setSent(true)
@@ -66,24 +66,12 @@ export default function Contact({ selectedProduct, onProductChange }) {
             </h2>
             <p className="text-zinc-400 leading-relaxed mb-8 max-w-md">
               Pricing is on request. Tell us what you need and we reply fastest
-              on WhatsApp or Telegram.
+              on Telegram.
             </p>
 
             <div className="flex flex-wrap gap-3">
               <motion.a
-                href={waLink(waMessage)}
-                target="_blank"
-                rel="noopener noreferrer"
-                data-testid="whatsapp-order-button"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center gap-2 px-5 py-3 bg-[#25D366]/10 border border-[#25D366]/30 text-[#25D366] text-sm font-medium hover:bg-[#25D366]/20 transition-colors"
-              >
-                <MessageCircle size={18} />
-                WhatsApp
-              </motion.a>
-              <motion.a
-                href={tgLink}
+                href={tgMessageLink(tgMessage)}
                 target="_blank"
                 rel="noopener noreferrer"
                 data-testid="telegram-order-button"
@@ -154,9 +142,9 @@ export default function Contact({ selectedProduct, onProductChange }) {
                 />
               </div>
               <div>
-                <label className="block text-[11px] uppercase tracking-wider text-zinc-500 mb-1.5">
-                  WhatsApp / Telegram / Email
-                </label>
+              <label className="block text-[11px] uppercase tracking-wider text-zinc-500 mb-1.5">
+                Telegram / Email
+              </label>
                 <motion.input
                   whileFocus={{ scale: 1.01 }}
                   transition={{ duration: 0.3 }}
@@ -193,7 +181,7 @@ export default function Contact({ selectedProduct, onProductChange }) {
             )}
             {sent && (
               <p className="text-sm text-emerald-400">
-                Enquiry sent. We reply fastest on WhatsApp or Telegram.
+                Enquiry sent. We reply fastest on Telegram.
               </p>
             )}
 

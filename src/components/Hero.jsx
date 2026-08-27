@@ -2,7 +2,7 @@ import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { ChevronDown } from 'lucide-react'
 import { STATS } from '../data/products'
-import { waLink } from '../config'
+import { tgMessageLink } from '../config'
 
 export default function Hero({ onNavigate }) {
   const sectionRef = useRef(null)
@@ -96,7 +96,7 @@ export default function Hero({ onNavigate }) {
                 Browse Products
               </motion.button>
               <motion.a
-                href={waLink("Hi MR PEPTIDES — I'd like pricing on your products.")}
+                href={tgMessageLink("Hi MR PEPTIDES — I'd like pricing on your products.")}
                 target="_blank"
                 rel="noopener noreferrer"
                 data-testid="hero-request-price-button"

@@ -64,7 +64,7 @@ export default async function handler(req: NextRequest) {
     })
   } catch (error) {
     return new Response(JSON.stringify({ 
-      reply: 'I apologize, but I am currently unable to process your request. Please contact us directly via WhatsApp.' 
+      reply: 'I apologize, but I am currently unable to process your request. Please contact us directly via Telegram.' 
     }), { status: 500 })
   }
 }
@@ -92,7 +92,7 @@ Create `.env.local`:
 
 ```env
 OPENAI_API_KEY=your_openai_api_key_here
-NEXT_PUBLIC_WHATSAPP_NUMBER=447868771804
+NEXT_PUBLIC_TELEGRAM_HANDLE=mr_peptides
 ```
 
 ### 5. Deploy
@@ -108,7 +108,7 @@ npm run preview
 - **Colors**: Use brand colors from `chatbot-config.ts`
 - **Disclaimer**: Always maintain "research use only" positioning
 - **No medical claims**: Chatbot cannot make therapeutic or medical claims
-- **Pricing**: Always redirect to WhatsApp for pricing inquiries
+- **Pricing**: Always redirect to Telegram for pricing inquiries
 
 ## Customization
 
@@ -138,7 +138,7 @@ Edit `BRAND_COLORS` in `src/config/chatbot-config.ts` to match your brand palett
 ## Testing
 
 Test these scenarios:
-- Pricing inquiry → Should redirect to WhatsApp
+- Pricing inquiry → Should redirect to Telegram
 - Product specs → Should provide accurate details
 - Medical claim → Should correct to research framing
 - API failure → Should use fallback responses

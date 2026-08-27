@@ -1,8 +1,7 @@
 // Replace with real contact handles when going live
-export const WHATSAPP_NUMBER = '447868771804'
-export const TELEGRAM_HANDLE = 'mrpeptides'
-
-export const waLink = (message = '') =>
-  `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`
+export const TELEGRAM_HANDLE = 'mr_peptides'
 
 export const tgLink = `https://t.me/${TELEGRAM_HANDLE}`
+
+export const tgMessageLink = (message = '') =>
+  `https://t.me/${TELEGRAM_HANDLE}?text=${encodeURIComponent(message)}`

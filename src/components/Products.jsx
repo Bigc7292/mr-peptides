@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { PRODUCTS, CATEGORIES } from '../data/products'
-import { waLink } from '../config'
+import { tgMessageLink } from '../config'
 
 const cardVariants = {
   hidden: { opacity: 0, y: 28, scale: 0.97, filter: 'blur(4px)' },
@@ -101,7 +101,7 @@ function ProductCard({ p }) {
           ))}
         </div>
         <motion.a
-          href={waLink(`Hi MR PEPTIDES — I'd like pricing for ${p.name} (${p.code}).`)}
+          href={tgMessageLink(`Hi MR PEPTIDES — I'd like pricing for ${p.name} (${p.code}).`)}
           target="_blank"
           rel="noopener noreferrer"
           whileHover={{ scale: 1.03 }}
@@ -156,7 +156,7 @@ export default function Products({ onRequestPrice }) {
             </h2>
             <p className="text-zinc-500 text-sm mt-2">
               {filtered.length} compounds shown · Pricing on request via
-              WhatsApp or Telegram
+              Telegram
             </p>
           </div>
 
@@ -216,7 +216,7 @@ export default function Products({ onRequestPrice }) {
                 Janoshik-verified purity. Alluvi Healthcare manufactured.
               </p>
               <a
-                href={waLink("Hi MR PEPTIDES — I'd like pricing for Retatrutide Triple Agonist (RP-02).")}
+                href={tgMessageLink("Hi MR PEPTIDES — I'd like pricing for Retatrutide Triple Agonist (RP-02).")}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-block px-6 py-3 bg-accent text-black text-sm font-semibold uppercase tracking-wider hover:bg-orange-500 transition-colors glow-border"

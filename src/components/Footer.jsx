@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { waLink, tgLink } from '../config'
+import { tgMessageLink, tgLink } from '../config'
 
 const LINKS = [
   { id: 'manifesto', label: 'The Standard' },
@@ -82,15 +82,15 @@ export default function Footer({ onNavigate }) {
             </p>
             <div className="flex flex-col gap-2.5">
               <motion.a
-                href={waLink("Hi MR PEPTIDES — I'd like pricing on your products.")}
+                href={tgMessageLink("Hi MR PEPTIDES — I'd like pricing on your products.")}
                 target="_blank"
                 rel="noopener noreferrer"
-                data-testid="footer-whatsapp-link"
-                whileHover={{ x: 4, color: '#25D366' }}
+                data-testid="footer-telegram-link"
+                whileHover={{ x: 4, color: '#2AABEE' }}
                 transition={{ duration: 0.35 }}
                 className="text-sm text-zinc-400 transition-colors"
               >
-                WhatsApp
+                Telegram
               </motion.a>
               <motion.a
                 href={tgLink}

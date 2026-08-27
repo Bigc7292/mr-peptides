@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { waLink } from '../config'
+import { tgMessageLink } from '../config'
 import { PRODUCTS } from '../data/products'
 
 export default function FloatingCTA() {
@@ -7,7 +7,7 @@ export default function FloatingCTA() {
 
   return (
     <motion.a
-      href={waLink(`Hi MR PEPTIDES — I'd like pricing for ${featured.name} (${featured.code}).`)}
+      href={tgMessageLink(`Hi MR PEPTIDES — I'd like pricing for ${featured.name} (${featured.code}).`)}
       target="_blank"
       rel="noopener noreferrer"
       initial={{ opacity: 0, y: 20, scale: 0.9 }}

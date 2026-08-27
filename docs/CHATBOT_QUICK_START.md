@@ -92,7 +92,7 @@ Create `.env.local`:
 
 ```env
 OPENAI_API_KEY=your_openai_api_key_here
-NEXT_PUBLIC_TELEGRAM_HANDLE=mr_peptides
+NEXT_PUBLIC_TELEGRAM_HANDLE=mrpeptidesbot
 ```
 
 ### 5. Deploy

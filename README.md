@@ -37,7 +37,7 @@ Output is in `dist/`. Deploy that folder to any static host (Vercel, Netlify, Cl
 Edit `src/config.js`:
 
 ```js
-export const TELEGRAM_HANDLE = 'mr_peptides'
+export const TELEGRAM_HANDLE = 'mrpeptidesbot'
 ```
 
 Update product data in `src/data/products.js`.

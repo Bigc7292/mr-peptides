@@ -1,5 +1,5 @@
 // Replace with real contact handles when going live
-export const TELEGRAM_HANDLE = 'mr_peptides'
+export const TELEGRAM_HANDLE = 'mrpeptidesbot'
 
 export const tgLink = `https://t.me/${TELEGRAM_HANDLE}`
 

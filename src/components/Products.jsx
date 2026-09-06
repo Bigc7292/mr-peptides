@@ -101,7 +101,7 @@ function ProductCard({ p }) {
           ))}
         </div>
         <motion.a
-          href={tgMessageLink(`Hi MR PEPTIDES — I'd like pricing for ${p.name} (${p.code}).`)}
+          href={tgMessageLink(`Hi Mr & Mrs PepTides — I'd like pricing for ${p.name} (${p.code}).`)}
           target="_blank"
           rel="noopener noreferrer"
           whileHover={{ scale: 1.03 }}
@@ -216,7 +216,7 @@ export default function Products({ onRequestPrice }) {
                 Janoshik-verified purity. Alluvi Healthcare manufactured.
               </p>
               <a
-                href={tgMessageLink("Hi MR PEPTIDES — I'd like pricing for Retatrutide Triple Agonist (RP-02).")}
+                href={tgMessageLink("Hi Mr & Mrs PepTides — I'd like pricing for Retatrutide Triple Agonist (RP-02).")}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-block px-6 py-3 bg-accent text-black text-sm font-semibold uppercase tracking-wider hover:bg-orange-500 transition-colors glow-border"

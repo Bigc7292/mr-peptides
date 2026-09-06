@@ -1,11 +1,11 @@
 # AI Chatbot Technical Specification & Implementation Plan
-## MR PEPTIDES — Brand-Aligned Conversational Assistant
+## Mr & Mrs PepTides — Brand-Aligned Conversational Assistant
 
 ---
 
 ## 1. Executive Summary
 
-This document outlines the architecture, integration steps, and brand-aligned configuration for deploying a professional AI chatbot on the MR PEPTIDES website. The chatbot is designed to serve as a **research assistant** and **pricing concierge** for B2B and professional buyers, maintaining the site's established tone: authoritative, lab-precise, premium, and research-first.
+This document outlines the architecture, integration steps, and brand-aligned configuration for deploying a professional AI chatbot on the Mr & Mrs PepTides website. The chatbot is designed to serve as a **research assistant** and **pricing concierge** for B2B and professional buyers, maintaining the site's established tone: authoritative, lab-precise, premium, and research-first.
 
 ---
 
@@ -14,7 +14,7 @@ This document outlines the architecture, integration steps, and brand-aligned co
 ### 2.1 Core Brand Attributes
 | Attribute | Specification |
 |-----------|---------------|
-| **Brand Name** | MR PEPTIDES |
+| **Brand Name** | Mr & Mrs PepTides |
 | **Tagline** | Lab-verified research peptides |
 | **Positioning** | Peak-performance compounds for serious research |
 | **Audience** | Laboratory researchers, professional investigators, B2B buyers |
@@ -23,7 +23,7 @@ This document outlines the architecture, integration steps, and brand-aligned co
 
 ### 2.2 Chatbot Personality Profile
 
-**Name:** MR Assistant  
+**Name:** MP Assistant  
 **Role:** Research Peptide Concierge & Technical Advisor  
 **Personality:** Clinical precision meets premium service. The chatbot speaks like a senior lab consultant—confident, exact, and knowledgeable—but remains accessible for pricing and availability inquiries.
 
@@ -59,7 +59,7 @@ This document outlines the architecture, integration steps, and brand-aligned co
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                     MR PEPTIDES Website                      │
+│                     Mr & Mrs PepTides Website                      │
 │  (React + Vite + Tailwind + Framer Motion)                  │
 └────────────────────────┬────────────────────────────────────┘
                          │
@@ -137,12 +137,12 @@ This document outlines the architecture, integration steps, and brand-aligned co
 ### 4.1 Core System Prompt
 
 ```
-You are MR Assistant, the official AI concierge for MR PEPTIDES — a premier supplier of lab-verified research peptides.
+You are MP Assistant, the official AI concierge for Mr & Mrs PepTides — a premier supplier of lab-verified research peptides.
 
 ## IDENTITY
-- Name: MR Assistant
+- Name: MP Assistant
 - Role: Research Peptide Concierge & Technical Advisor
-- Organization: MR PEPTIDES
+- Organization: Mr & Mrs PepTides
 - Website: mr-peptides.com
 
 ## TONE & VOICE
@@ -218,7 +218,7 @@ export default function ChatbotWidget() {
     {
       id: 1,
       role: 'assistant',
-      content: 'Welcome to MR PEPTIDES. How can I assist with your research inquiry?',
+      content: 'Welcome to Mr & Mrs PepTides. How can I assist with your research inquiry?',
       timestamp: new Date(),
     }
   ])
@@ -329,7 +329,7 @@ export default function ChatbotWidget() {
 ```typescript
 // src/config/chatbot-config.ts
 
-export const SYSTEM_PROMPT = `You are MR Assistant, the official AI concierge for MR PEPTIDES...` // Full prompt from Section 4.1
+export const SYSTEM_PROMPT = `You are MP Assistant, the official AI concierge for Mr & Mrs PepTides...` // Full prompt from Section 4.1
 
 export const KNOWLEDGE_BASE = {
   products: [
@@ -467,7 +467,7 @@ export function getFallbackResponse(query: string): string {
   
   // Verification
   if (lower.includes('verif') || lower.includes('lab') || lower.includes('test') || lower.includes('purity')) {
-    return 'All MR PEPTIDES products are independently tested. Stability checkpoints are third-party verified by Janoshik. Purity standards are published for every batch.'
+    return 'All Mr & Mrs PepTides products are independently tested. Stability checkpoints are third-party verified by Janoshik. Purity standards are published for every batch.'
   }
   
   // Storage
@@ -587,13 +587,13 @@ const getQuickReplies = (lastMessage: string) => {
 // Pre-formatted Telegram messages
 export const TELEGRAM_TEMPLATES = {
   pricing: (productName: string) => 
-    `Hi MR PEPTIDES — I'd like pricing for ${productName}.`,
+    `Hi Mr & Mrs PepTides — I'd like pricing for ${productName}.`,
   
   general: () => 
-    `Hi MR PEPTIDES — I have a question about your products.`,
+    `Hi Mr & Mrs PepTides — I have a question about your products.`,
   
   technical: (question: string) => 
-    `Hi MR PEPTIDES — Technical question: ${question}`
+    `Hi Mr & Mrs PepTides — Technical question: ${question}`
 }
 
 // Trigger Telegram with pre-filled message
@@ -786,7 +786,7 @@ If rapid deployment is preferred over custom development:
 | **Custom GPT** | Easy to deploy, brand-aware | Requires OpenAI subscription, limited customization |
 | **Voiceflow** | Visual builder, multi-channel | Learning curve, per-seat pricing |
 
-**Recommendation:** For MR PEPTIDES' premium positioning and specific brand requirements, a **custom implementation** (Option A) is strongly recommended to maintain full control over tone, styling, and data handling.
+**Recommendation:** For Mr & Mrs PepTides' premium positioning and specific brand requirements, a **custom implementation** (Option A) is strongly recommended to maintain full control over tone, styling, and data handling.
 
 ---
 

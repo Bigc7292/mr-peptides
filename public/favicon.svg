@@ -1,4 +1,16 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
-  <rect width="32" height="32" rx="6" fill="#0A0A0A"/>
-  <text x="16" y="22" text-anchor="middle" font-family="system-ui,sans-serif" font-weight="900" font-size="14" fill="#EA580C">MR</text>
+<svg width="32" height="32" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="helixGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0F6B6B"/>
+      <stop offset="100%" stop-color="#F7931E"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="#0A0A0A"/>
+  <g transform="translate(20,8)" fill="none" stroke="url(#helixGrad)" stroke-width="3.6" stroke-linecap="round">
+    <path d="M8,0 C20,8 -4,16 8,24 C20,32 -4,40 8,48"/>
+    <path d="M16,0 C4,8 28,16 16,24 C4,32 28,40 16,48"/>
+    <line x1="6" y1="5.5" x2="18" y2="5.5" stroke-width="2.6" opacity="0.85"/>
+    <line x1="6" y1="23.5" x2="18" y2="23.5" stroke-width="2.6" opacity="0.85"/>
+    <line x1="6" y1="42" x2="18" y2="42" stroke-width="2.6" opacity="0.85"/>
+  </g>
 </svg>

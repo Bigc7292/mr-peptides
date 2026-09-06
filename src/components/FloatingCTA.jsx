@@ -7,7 +7,7 @@ export default function FloatingCTA() {
 
   return (
     <motion.a
-      href={tgMessageLink(`Hi MR PEPTIDES — I'd like pricing for ${featured.name} (${featured.code}).`)}
+      href={tgMessageLink(`Hi Mr & Mrs PepTides — I'd like pricing for ${featured.name} (${featured.code}).`)}
       target="_blank"
       rel="noopener noreferrer"
       initial={{ opacity: 0, y: 20, scale: 0.9 }}

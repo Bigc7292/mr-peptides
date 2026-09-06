@@ -1,6 +1,6 @@
-# MR PEPTIDES — Research Peptides Promo Site
+# Mr & Mrs PepTides — Research Peptides Promo Site
 
-A full rebuild of the [MR PEPTIDES](https://mr-peptides-promo.preview.emergentagent.com) frontend as a production-ready Vite + React + Tailwind site.
+A full rebuild of the [Mr & Mrs PepTides](https://mr-peptides-promo.preview.emergentagent.com) frontend as a production-ready Vite + React + Tailwind site.
 
 ## Features
 

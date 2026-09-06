@@ -1,8 +1,8 @@
-# MR PEPTIDES AI Chatbot — Quick Start Guide
+# Mr & Mrs PepTides AI Chatbot — Quick Start Guide
 
 ## Overview
 
-This directory contains the complete implementation plan and starter code for the MR PEPTIDES AI chatbot. The chatbot is designed to maintain strict brand alignment with your established tone: authoritative, precise, clinical, and premium.
+This directory contains the complete implementation plan and starter code for the Mr & Mrs PepTides AI chatbot. The chatbot is designed to maintain strict brand alignment with your established tone: authoritative, precise, clinical, and premium.
 
 ## Files
 
@@ -49,7 +49,7 @@ export default async function handler(req: NextRequest) {
       body: JSON.stringify({
         model: 'gpt-4o-mini',
         messages: [
-          { role: 'system', content: 'You are MR Assistant...' },
+          { role: 'system', content: 'You are MP Assistant...' },
           ...messages
         ],
         temperature: 0.4,

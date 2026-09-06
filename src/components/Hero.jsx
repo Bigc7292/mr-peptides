@@ -55,8 +55,8 @@ export default function Hero({ onNavigate }) {
               transition={{ duration: 0.8, delay: 0.1, ease: [0.25, 1, 0.5, 1] }}
               className="leading-[0.9] mb-6"
             >
-              <span className="block text-6xl sm:text-7xl md:text-8xl font-black tracking-tighter text-white">
-                MR
+              <span className="block text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-white">
+                MR <span className="text-accent">&amp;</span> MRS
               </span>
               <span
                 className="block text-6xl sm:text-7xl md:text-8xl font-black tracking-tighter"
@@ -96,7 +96,7 @@ export default function Hero({ onNavigate }) {
                 Browse Products
               </motion.button>
               <motion.a
-                href={tgMessageLink("Hi MR PEPTIDES — I'd like pricing on your products.")}
+                href={tgMessageLink("Hi Mr & Mrs PepTides — I'd like pricing on your products.")}
                 target="_blank"
                 rel="noopener noreferrer"
                 data-testid="hero-request-price-button"

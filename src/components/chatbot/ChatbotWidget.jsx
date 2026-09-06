@@ -7,7 +7,7 @@ import { tgMessageLink } from '../../config'
 
 const ACCENT = BRAND_COLORS.accent
 
-const GREETING = 'Welcome to MR PEPTIDES. How can I assist with your research inquiry?'
+const GREETING = 'Welcome to Mr & Mrs PepTides. How can I assist with your research inquiry?'
 
 const OFFER_TELEGRAM = 'Pricing is available on request via Telegram. Would you like me to open a chat for you?'
 const OFFER_TELEGRAM_ALTS = [
@@ -100,7 +100,7 @@ function getLocalReply(query, context) {
 
   if (lower.includes('verif') || lower.includes('lab') || lower.includes('test') || lower.includes('purity')) {
     return {
-      text: 'All MR PEPTIDES products are independently tested. Stability checkpoints are third-party verified by Janoshik. Purity standards are published for every batch.',
+      text: 'All Mr & Mrs PepTides products are independently tested. Stability checkpoints are third-party verified by Janoshik. Purity standards are published for every batch.',
     }
   }
 
@@ -343,8 +343,8 @@ export default function ChatbotWidget() {
       if (result.action === 'telegram') {
         const productName = result.product || ''
         const message = productName
-          ? `Hi MR PEPTIDES — I'd like pricing for ${productName}.`
-          : "Hi MR PEPTIDES — I'd like pricing on your products."
+          ? `Hi Mr & Mrs PepTides — I'd like pricing for ${productName}.`
+          : "Hi Mr & Mrs PepTides — I'd like pricing on your products."
         window.open(tgMessageLink(message), '_blank', 'noopener,noreferrer')
       }
 
@@ -378,11 +378,11 @@ export default function ChatbotWidget() {
           >
             <div className="px-4 py-3 border-b border-white/10 flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-md bg-zinc-900 border border-white/10 flex items-center justify-center">
-                  <span className="text-xs font-black" style={{ color: ACCENT }}>MR</span>
+                <div className="w-8 h-8 rounded-md overflow-hidden bg-zinc-900 border border-white/10 flex items-center justify-center">
+                  <img src="/logo-icon.svg" alt="Mr & Mrs PepTides" className="w-full h-full object-contain" />
                 </div>
                 <div>
-                  <p className="text-sm font-bold text-white">MR Assistant</p>
+                  <p className="text-sm font-bold text-white">MP Assistant</p>
                   <p className="text-[10px] text-zinc-500 uppercase tracking-wider">Research Concierge</p>
                 </div>
               </div>

@@ -44,10 +44,10 @@ export default function Footer({ onNavigate }) {
           <motion.div variants={itemVariants} className="lg:col-span-2">
             <a href="#hero" onClick={() => onNavigate('hero')} className="flex items-center gap-2.5 mb-4" data-testid="footer-logo">
               <div className="w-9 h-9 rounded-md bg-zinc-900 border border-white/10 flex items-center justify-center">
-                <img src="/logo.jpg" alt="MR Peptides" className="w-full h-full object-contain" />
+                <img src="/logo-icon.svg" alt="Mr & Mrs PepTides" className="w-full h-full object-contain" />
               </div>
               <span className="font-bold tracking-tight">
-                MR<span className="text-accent">PEPTIDES</span>
+                MR <span className="text-accent">&amp;</span> MRS PEPTIDES
               </span>
             </a>
             <p className="text-sm text-zinc-500 max-w-sm leading-relaxed">
@@ -82,7 +82,7 @@ export default function Footer({ onNavigate }) {
             </p>
             <div className="flex flex-col gap-2.5">
               <motion.a
-                href={tgMessageLink("Hi MR PEPTIDES — I'd like pricing on your products.")}
+                href={tgMessageLink("Hi Mr & Mrs PepTides — I'd like pricing on your products.")}
                 target="_blank"
                 rel="noopener noreferrer"
                 data-testid="footer-telegram-link"
@@ -114,7 +114,7 @@ export default function Footer({ onNavigate }) {
           transition={{ duration: 0.7, delay: 0.3 }}
           className="border-t border-white/10 pt-8 flex flex-col sm:flex-row justify-between gap-4 text-xs text-zinc-600"
         >
-          <p>© {new Date().getFullYear()} MR PEPTIDES. Research use only.</p>
+          <p>© {new Date().getFullYear()} Mr & Mrs PepTides. Research use only.</p>
           <p className="max-w-md sm:text-right">
             Not for human or veterinary consumption. Not evaluated by FDA, EMA
             or equivalent authorities.

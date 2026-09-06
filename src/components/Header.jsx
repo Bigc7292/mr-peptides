@@ -64,10 +64,10 @@ export default function Header({ onNavigate }) {
           whileTap={{ scale: 0.97 }}
         >
           <div className="w-9 h-9 rounded-md overflow-hidden bg-zinc-900 border border-white/10 flex items-center justify-center">
-            <img src="/logo.jpg" alt="MR Peptides" className="w-full h-full object-contain" />
+            <img src="/logo-icon.svg" alt="Mr & Mrs PepTides" className="w-full h-full object-contain" />
           </div>
           <span className="font-bold tracking-tight text-white">
-            MR<span className="text-accent">PEPTIDES</span>
+            MR <span className="text-accent">&amp;</span> MRS PEPTIDES
           </span>
         </motion.a>
 

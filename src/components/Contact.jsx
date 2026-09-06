@@ -17,7 +17,7 @@ export default function Contact({ selectedProduct, onProductChange }) {
     if (selectedProduct) setProduct(selectedProduct)
   }, [selectedProduct])
 
-  const tgMessage = `Hi MR PEPTIDES — I'd like pricing${
+  const tgMessage = `Hi Mr & Mrs PepTides — I'd like pricing${
     product ? ` for ${product}` : ' on your products'
   }.${name ? ` — ${name}` : ''}${contact ? ` (${contact})` : ''}${
     message ? `\n\n${message}` : ''

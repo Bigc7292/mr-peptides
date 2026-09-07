@@ -153,7 +153,7 @@ function getLocalReply(query, context) {
 
   if (lower.includes('retatrutide')) {
     return {
-      text: 'Retatrutide is a triple GLP-1/GIP/glucagon agonist. Available in 20mg and 40mg prefilled pen formulations. 56-day room-temperature stability. Alluvi Healthcare manufactured. Would you like specifications or pricing?',
+      text: 'Retatrutide is a triple GLP-1/GIP/glucagon agonist. Available in 20mg and 40mg prefilled pen formulations. 56-day room-temperature stability. Would you like specifications or pricing?',
       action: 'pending_telegram',
       setPendingTelegram: true,
     }

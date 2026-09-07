@@ -7,7 +7,7 @@ export const PRODUCTS = [
     category: 'Metabolic',
     tags: ['GLP-1', 'GIP', 'Glucagon', 'Featured'],
     blurb:
-      'Triple agonist targeting GLP-1, GIP and glucagon receptors for advanced weight-management research. Independently tested for 56-day room-temperature stability. Alluvi Healthcare manufactured. Store refrigerated (2°C to 8°C). For subcutaneous injection only.',
+      'Triple agonist targeting GLP-1, GIP and glucagon receptors for advanced weight-management research. Independently tested for 56-day room-temperature stability. Store refrigerated (2°C to 8°C). For subcutaneous injection only.',
     images: [
       '/products/main-product.jpg',
       '/products/retatrutide-20mg-vls-pen.jpg',

@@ -143,7 +143,7 @@ export default function Hero({ onNavigate }) {
                 />
                 <div className="absolute bottom-0 left-0 right-0 p-3 flex justify-between text-[10px] uppercase tracking-widest text-zinc-500 bg-gradient-to-t from-black/80 to-transparent">
                   <span>Featured Product</span>
-                  <span>Alluvi Healthcare</span>
+                  <span>Lab Verified</span>
                 </div>
               </motion.div>
             </div>

@@ -211,9 +211,9 @@ export default function Products({ onRequestPrice }) {
                 Retatrutide Triple Agonist
               </h3>
               <p className="text-zinc-400 text-sm mb-4 max-w-xl">
-                Our flagship compound. Triple agonist targeting GLP-1, GIP and glucagon receptors 
-                for advanced weight-management research. 56-day room-temperature stability with 
-                Janoshik-verified purity. Alluvi Healthcare manufactured.
+                Our flagship compound. Triple agonist targeting GLP-1, GIP and glucagon receptors
+                for advanced weight-management research. 56-day room-temperature stability with
+                Janoshik-verified purity.
               </p>
               <a
                 href={tgMessageLink("Hi Mr & Mrs PepTides — I'd like pricing for Retatrutide Triple Agonist (RP-02).")}

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="Mr and Mrs PepTides helix mark">
+  <defs>
+    <linearGradient id="strandTA" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0F6B6B"/>
+      <stop offset="1" stop-color="#F7931E"/>
+    </linearGradient>
+    <linearGradient id="strandAT" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F7931E"/>
+      <stop offset="1" stop-color="#0F6B6B"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="#0A0A0A"/>
+  <g fill="none" stroke-linecap="round">
+    <g stroke="#EA580C" stroke-width="16" opacity="0.6">
+      <line x1="198" y1="150" x2="314" y2="150"/>
+      <line x1="198" y1="256" x2="314" y2="256"/>
+      <line x1="198" y1="362" x2="314" y2="362"/>
+    </g>
+    <path d="M256 96 C 322 128 322 171 256 203 C 190 235 190 277 256 309 C 322 341 322 384 256 416" stroke="url(#strandTA)" stroke-width="26"/>
+    <path d="M256 96 C 190 128 190 171 256 203 C 322 235 322 277 256 309 C 190 341 190 384 256 416" stroke="url(#strandAT)" stroke-width="26"/>
+  </g>
+</svg>

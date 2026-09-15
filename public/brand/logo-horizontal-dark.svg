@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="320" viewBox="0 0 1180 320" role="img" aria-label="Mr and Mrs PepTides">
+  <defs>
+    <linearGradient id="sTA" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0F6B6B"/><stop offset="1" stop-color="#F7931E"/></linearGradient>
+    <linearGradient id="sAT" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F7931E"/><stop offset="1" stop-color="#0F6B6B"/></linearGradient>
+  </defs>
+  <rect width="1180" height="320" fill="none"/>
+  <g transform="translate(24,40) scale(0.46875)">
+    <rect width="512" height="512" rx="112" fill="#141414"/>
+    <g fill="none" stroke-linecap="round">
+      <g stroke="#EA580C" stroke-width="16" opacity="0.6">
+        <line x1="198" y1="150" x2="314" y2="150"/><line x1="198" y1="256" x2="314" y2="256"/><line x1="198" y1="362" x2="314" y2="362"/>
+      </g>
+      <path d="M256 96 C 322 128 322 171 256 203 C 190 235 190 277 256 309 C 322 341 322 384 256 416" stroke="url(#sTA)" stroke-width="26"/>
+      <path d="M256 96 C 190 128 190 171 256 203 C 322 235 322 277 256 309 C 190 341 190 384 256 416" stroke="url(#sAT)" stroke-width="26"/>
+    </g>
+  </g>
+  <text x="292" y="132" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="30" font-weight="600" letter-spacing="7" fill="#8B8B85">MR <tspan fill="#EA580C">&amp;</tspan> MRS</text>
+  <rect x="292" y="150" width="150" height="4" fill="#F7931E"/>
+  <text x="288" y="252" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="104" font-weight="900" letter-spacing="-4" fill="#FBFBFA">PepTides</text>
+</svg>
